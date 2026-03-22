@@ -11,12 +11,11 @@ import 'score_summary_screen.dart';
 // Category groups — maps first index in each group to its label
 // ─────────────────────────────────────────────────────────────────────────────
 const _kGroups = <int, String>{
-  0:  'Card VP',
-  4:  'Board Tokens',
-  8:  'Ecosystem Objectives',
-  10: 'Fauna Board',
-  11: 'Special Bonus',
-  12: 'Other',
+  0:  'Card VP',           // indices 0–3: Island, Climate, Tableau, Events
+  4:  'Tokens & Growth',  // indices 4–7: Compost, Sprouts, Trunks/Canopy, Terrain
+  8:  'Ecosystem Objectives', // indices 8–10: Personal Eco, Shared Eco, First Tableau
+  11: 'Fauna Board',      // index 11: Fauna Board VP
+  12: 'Other',            // index 12: Other VP
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
