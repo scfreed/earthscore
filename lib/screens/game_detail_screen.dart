@@ -17,16 +17,16 @@ import '../widgets/player_avatar.dart';
 
 int _valueFor(PlayerScore s, String key) {
   switch (key) {
-    case 'cardsVp':       return s.cardsVp;
-    case 'sproutsVp':     return s.sproutsVp;
-    case 'trunksVp':      return s.trunksVp;
-    case 'canopyVp':      return s.canopyVp;
-    case 'terrainVp':     return s.terrainVp;
-    case 'personalEcoVp': return s.personalEcoVp;
-    case 'sharedEcoVp':   return s.sharedEcoVp;
-    case 'compostCards':  return s.compostCards;
-    case 'eventsVp':      return s.eventsVp;
-    case 'faunaBoardVp':  return s.faunaBoardVp;
+    case 'cardsVp':        return s.cardsVp;
+    case 'sproutsVp':      return s.sproutsVp;
+    case 'growthVp':       return s.growthVp;
+    case 'terrainVp':      return s.terrainVp;
+    case 'personalEcoVp':  return s.personalEcoVp;
+    case 'sharedEco1Vp':   return s.sharedEco1Vp;
+    case 'sharedEco2Vp':   return s.sharedEco2Vp;
+    case 'compostCards':   return s.compostCards;
+    case 'eventsVp':       return s.eventsVp;
+    case 'faunaBoardVp':   return s.faunaBoardVp;
     default:              return 0;
   }
 }

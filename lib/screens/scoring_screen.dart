@@ -12,9 +12,9 @@ import 'score_summary_screen.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 const _kGroups = <int, String>{
   0: 'Card VP',              // index 0: Cards VP
-  1: 'Growth',               // indices 1–3: Sprouts, Trunks, Canopy
-  4: 'Terrain',              // index 4: Terrain VP
-  5: 'Ecosystem Objectives', // indices 5–6: Personal Eco, Shared Eco
+  1: 'Growth',               // indices 1–2: Sprouts, Trunks/Canopy
+  3: 'Terrain',              // index 3: Terrain VP
+  4: 'Ecosystem Objectives', // indices 4–6: Personal Eco, Shared Eco 1, Shared Eco 2
   7: 'Compost & Events',     // indices 7–8: Compost, Events VP
   9: 'Fauna Board',          // index 9: Fauna Board VP
 };

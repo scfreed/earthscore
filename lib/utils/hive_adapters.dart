@@ -59,11 +59,11 @@ class PlayerScoreAdapter extends TypeAdapter<PlayerScore> {
       playerId: f[0] as String,
       cardsVp: (f[1] as int?) ?? 0,
       sproutsVp: (f[2] as int?) ?? 0,
-      trunksVp: (f[3] as int?) ?? 0,
-      canopyVp: (f[4] as int?) ?? 0,
-      terrainVp: (f[5] as int?) ?? 0,
-      personalEcoVp: (f[6] as int?) ?? 0,
-      sharedEcoVp: (f[7] as int?) ?? 0,
+      growthVp: (f[3] as int?) ?? 0,
+      terrainVp: (f[4] as int?) ?? 0,
+      personalEcoVp: (f[5] as int?) ?? 0,
+      sharedEco1Vp: (f[6] as int?) ?? 0,
+      sharedEco2Vp: (f[7] as int?) ?? 0,
       compostCards: (f[8] as int?) ?? 0,
       eventsVp: (f[9] as int?) ?? 0,
       faunaBoardVp: (f[10] as int?) ?? 0,
@@ -77,11 +77,11 @@ class PlayerScoreAdapter extends TypeAdapter<PlayerScore> {
       ..writeByte(0)..write(obj.playerId)
       ..writeByte(1)..write(obj.cardsVp)
       ..writeByte(2)..write(obj.sproutsVp)
-      ..writeByte(3)..write(obj.trunksVp)
-      ..writeByte(4)..write(obj.canopyVp)
-      ..writeByte(5)..write(obj.terrainVp)
-      ..writeByte(6)..write(obj.personalEcoVp)
-      ..writeByte(7)..write(obj.sharedEcoVp)
+      ..writeByte(3)..write(obj.growthVp)
+      ..writeByte(4)..write(obj.terrainVp)
+      ..writeByte(5)..write(obj.personalEcoVp)
+      ..writeByte(6)..write(obj.sharedEco1Vp)
+      ..writeByte(7)..write(obj.sharedEco2Vp)
       ..writeByte(8)..write(obj.compostCards)
       ..writeByte(9)..write(obj.eventsVp)
       ..writeByte(10)..write(obj.faunaBoardVp);

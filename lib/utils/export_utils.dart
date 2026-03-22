@@ -19,16 +19,16 @@ import 'earth_categories.dart';
 
 int _val(PlayerScore s, String key) {
   switch (key) {
-    case 'cardsVp':       return s.cardsVp;
-    case 'sproutsVp':     return s.sproutsVp;
-    case 'trunksVp':      return s.trunksVp;
-    case 'canopyVp':      return s.canopyVp;
-    case 'terrainVp':     return s.terrainVp;
-    case 'personalEcoVp': return s.personalEcoVp;
-    case 'sharedEcoVp':   return s.sharedEcoVp;
-    case 'compostCards':  return s.compostCards;
-    case 'eventsVp':      return s.eventsVp;
-    case 'faunaBoardVp':  return s.faunaBoardVp;
+    case 'cardsVp':        return s.cardsVp;
+    case 'sproutsVp':      return s.sproutsVp;
+    case 'growthVp':       return s.growthVp;
+    case 'terrainVp':      return s.terrainVp;
+    case 'personalEcoVp':  return s.personalEcoVp;
+    case 'sharedEco1Vp':   return s.sharedEco1Vp;
+    case 'sharedEco2Vp':   return s.sharedEco2Vp;
+    case 'compostCards':   return s.compostCards;
+    case 'eventsVp':       return s.eventsVp;
+    case 'faunaBoardVp':   return s.faunaBoardVp;
     default:              return 0;
   }
 }
@@ -157,11 +157,11 @@ const _kHeaderH    = 52.0;
 const _shortLabels = {
   'cardsVp':       'Cards VP',
   'sproutsVp':     'Sprouts (×1)',
-  'trunksVp':      'Trunks (×1)',
-  'canopyVp':      'Canopy VP',
+  'growthVp':      'Trunks/Canopy',
   'terrainVp':     'Terrain VP',
   'personalEcoVp': 'Personal Eco',
-  'sharedEcoVp':   'Shared Eco',
+  'sharedEco1Vp':  'Shared Eco 1',
+  'sharedEco2Vp':  'Shared Eco 2',
   'compostCards':  'Compost (×1)',
   'eventsVp':      'Events VP',
   'faunaBoardVp':  'Fauna Board',
@@ -170,8 +170,8 @@ const _shortLabels = {
 const _groupLabels = {
   0: 'Card VP',
   1: 'Growth',
-  4: 'Terrain',
-  5: 'Ecosystem',
+  3: 'Terrain',
+  4: 'Ecosystem',
   7: 'Compost & Events',
   9: 'Fauna Board',
 };

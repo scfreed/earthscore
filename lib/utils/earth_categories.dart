@@ -35,7 +35,7 @@ const List<EarthCategory> kEarthCategories = [
     iconColor: Color(0xFF5D4037), // brown
   ),
 
-  // ── Col 2–4: Growth tokens ────────────────────────────────────────────────
+  // ── Col 2–3: Growth tokens ────────────────────────────────────────────────
   EarthCategory(
     key: 'sproutsVp',
     label: 'Sprouts',
@@ -46,20 +46,11 @@ const List<EarthCategory> kEarthCategories = [
     multiplier: 1,
   ),
   EarthCategory(
-    key: 'trunksVp',
-    label: 'Trunks',
-    subtitle: '×1 VP per trunk',
-    tooltip: 'Count Trunk tokens in your tableau. Each = 1 VP — unless a Canopy has been placed on that stack, in which case count it in Canopy VP instead.',
-    icon: Icons.park,
-    iconColor: Color(0xFF388E3C), // mid-green
-    multiplier: 1,
-  ),
-  EarthCategory(
-    key: 'canopyVp',
-    label: 'Canopy VP',
-    tooltip: 'Total Canopy completion VP. For each growth stack where the Canopy is placed, score the printed Canopy VP instead of 1VP/Trunk.',
+    key: 'growthVp',
+    label: 'Trunks / Canopy VP',
+    tooltip: 'Score 1VP per Trunk in your tableau. If the Canopy has been placed on a stack, score the Canopy completion VP for that stack instead of 1VP/Trunk. Enter the combined total here.',
     icon: Icons.forest,
-    iconColor: Color(0xFF1B5E20), // dark-green
+    iconColor: Color(0xFF2E7D32), // dark-green
   ),
 
   // ── Col 5: Terrain ────────────────────────────────────────────────────────
@@ -71,7 +62,7 @@ const List<EarthCategory> kEarthCategories = [
     iconColor: Color(0xFF8D6E63), // brown-light
   ),
 
-  // ── Col 6–7: Ecosystem objectives ─────────────────────────────────────────
+  // ── Col 5–7: Ecosystem objectives ─────────────────────────────────────────
   EarthCategory(
     key: 'personalEcoVp',
     label: 'Personal Ecosystem',
@@ -80,11 +71,18 @@ const List<EarthCategory> kEarthCategories = [
     iconColor: Color(0xFF7B1FA2), // purple
   ),
   EarthCategory(
-    key: 'sharedEcoVp',
-    label: 'Shared Ecosystem',
-    tooltip: 'Combined VP from both shared Ecosystem objectives you fulfilled.',
+    key: 'sharedEco1Vp',
+    label: 'Shared Ecosystem 1',
+    tooltip: 'VP from the first shared Ecosystem objective.',
     icon: Icons.groups,
     iconColor: Color(0xFF0288D1), // blue
+  ),
+  EarthCategory(
+    key: 'sharedEco2Vp',
+    label: 'Shared Ecosystem 2',
+    tooltip: 'VP from the second shared Ecosystem objective.',
+    icon: Icons.groups_outlined,
+    iconColor: Color(0xFF0277BD), // darker blue
   ),
 
   // ── Col 8: Compost ────────────────────────────────────────────────────────

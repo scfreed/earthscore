@@ -101,16 +101,16 @@ class ScoringSessionNotifier extends StateNotifier<ScoringSession?> {
 
   static PlayerScore _applyInt(PlayerScore s, String field, int v) {
     switch (field) {
-      case 'cardsVp':       return s.copyWith(cardsVp: v);
-      case 'sproutsVp':     return s.copyWith(sproutsVp: v);
-      case 'trunksVp':      return s.copyWith(trunksVp: v);
-      case 'canopyVp':      return s.copyWith(canopyVp: v);
-      case 'terrainVp':     return s.copyWith(terrainVp: v);
-      case 'personalEcoVp': return s.copyWith(personalEcoVp: v);
-      case 'sharedEcoVp':   return s.copyWith(sharedEcoVp: v);
-      case 'compostCards':  return s.copyWith(compostCards: v);
-      case 'eventsVp':      return s.copyWith(eventsVp: v);
-      case 'faunaBoardVp':  return s.copyWith(faunaBoardVp: v);
+      case 'cardsVp':        return s.copyWith(cardsVp: v);
+      case 'sproutsVp':      return s.copyWith(sproutsVp: v);
+      case 'growthVp':       return s.copyWith(growthVp: v);
+      case 'terrainVp':      return s.copyWith(terrainVp: v);
+      case 'personalEcoVp':  return s.copyWith(personalEcoVp: v);
+      case 'sharedEco1Vp':   return s.copyWith(sharedEco1Vp: v);
+      case 'sharedEco2Vp':   return s.copyWith(sharedEco2Vp: v);
+      case 'compostCards':   return s.copyWith(compostCards: v);
+      case 'eventsVp':       return s.copyWith(eventsVp: v);
+      case 'faunaBoardVp':   return s.copyWith(faunaBoardVp: v);
       default:              return s;
     }
   }
