@@ -23,120 +23,97 @@ class EarthCategory {
   });
 }
 
-/// All scoring categories in the order they appear on the scoring screen.
-/// Order follows the official scoring steps from the Earth rulebook.
-/// The [key] values must match the field names used in PlayerScore and
-/// score_calculator.dart so that the UI and logic stay in sync.
+/// Scoring categories in scoresheet column order (left → right after the M column).
+/// Keys match PlayerScore field names exactly.
 const List<EarthCategory> kEarthCategories = [
-  // ── Step 1: Card base VP ─────────────────────────────────────────────────
-  // Island + Climate + all tableau cards (NOT Event cards, hand cards, or
-  // cards in Compost).
+  // ── Col 1: Base card VP ───────────────────────────────────────────────────
   EarthCategory(
-    key: 'islandCardVp',
-    label: 'Island Card VP',
-    tooltip: 'Base VP (♦) printed on your Island card.',
-    icon: Icons.landscape,
-    iconColor: Color(0xFF6D4C41), // brown
-  ),
-  EarthCategory(
-    key: 'climateCardVp',
-    label: 'Climate Card VP',
-    tooltip: 'Base VP (♦) printed on your Climate card.',
-    icon: Icons.wb_cloudy,
-    iconColor: Color(0xFF42A5F5), // blue
-  ),
-  EarthCategory(
-    key: 'tableauCardsVp',
-    label: 'Tableau Cards VP',
-    tooltip: 'Total base VP (♦) from all flora & fauna cards in your 4×4 tableau. Do NOT include Event cards, cards in your hand, or cards in your Compost.',
-    icon: Icons.grid_view,
-    iconColor: Color(0xFF66BB6A), // green
+    key: 'cardsVp',
+    label: 'Cards VP',
+    tooltip: 'Total base VP (♦) from your Island card + Climate card + all cards in your 4×4 tableau. Do NOT count Event cards, cards in your hand, or cards in your Compost.',
+    icon: Icons.style,
+    iconColor: Color(0xFF5D4037), // brown
   ),
 
-  // ── Step 2: Event space VP ───────────────────────────────────────────────
+  // ── Col 2–4: Growth tokens ────────────────────────────────────────────────
   EarthCategory(
-    key: 'eventsVp',
-    label: 'Events VP',
-    tooltip: 'Base VP from cards in your Event space. Can be negative.',
-    icon: Icons.bolt,
-    iconColor: Color(0xFFEF5350), // red
-  ),
-
-  // ── Steps 3–6: Tokens & Growth ───────────────────────────────────────────
-  EarthCategory(
-    key: 'compostCards',
-    label: 'Compost Cards',
-    subtitle: '×1 VP per card',
-    tooltip: 'Step 3: Count cards in your Compost pile. Each = 1 VP.',
-    icon: Icons.compost,
-    iconColor: Color(0xFF4E342E), // dark-brown
-    multiplier: 1,
-  ),
-  EarthCategory(
-    key: 'sproutsRemaining',
+    key: 'sproutsVp',
     label: 'Sprouts',
     subtitle: '×1 VP per sprout',
-    tooltip: 'Step 4: Count Sprout tokens in your tableau. Each = 1 VP.',
+    tooltip: 'Count Sprout tokens in your tableau. Each = 1 VP.',
     icon: Icons.eco,
-    iconColor: Color(0xFF43A047), // mid-green
+    iconColor: Color(0xFF43A047), // green
     multiplier: 1,
   ),
   EarthCategory(
-    key: 'growthVp',
-    label: 'Trunks / Canopy VP',
-    tooltip: 'Step 5: Score 1VP per Trunk in your tableau. If the Canopy has been placed on a stack, score the Canopy completion VP instead of 1VP/Trunk for that stack.',
+    key: 'trunksVp',
+    label: 'Trunks',
+    subtitle: '×1 VP per trunk',
+    tooltip: 'Count Trunk tokens in your tableau. Each = 1 VP — unless a Canopy has been placed on that stack, in which case count it in Canopy VP instead.',
     icon: Icons.park,
-    iconColor: Color(0xFF2E7D32), // dark-green
+    iconColor: Color(0xFF388E3C), // mid-green
+    multiplier: 1,
   ),
+  EarthCategory(
+    key: 'canopyVp',
+    label: 'Canopy VP',
+    tooltip: 'Total Canopy completion VP. For each growth stack where the Canopy is placed, score the printed Canopy VP instead of 1VP/Trunk.',
+    icon: Icons.forest,
+    iconColor: Color(0xFF1B5E20), // dark-green
+  ),
+
+  // ── Col 5: Terrain ────────────────────────────────────────────────────────
   EarthCategory(
     key: 'terrainVp',
     label: 'Terrain VP',
-    tooltip: 'Step 6: VP from Terrain cards in your tableau that have end-game scoring bonuses. Terrains with only in-game effects score 0 VP here.',
+    tooltip: 'VP from Terrain cards in your tableau that have end-game scoring bonuses. Terrains with only in-game effects score 0 VP here.',
     icon: Icons.terrain,
     iconColor: Color(0xFF8D6E63), // brown-light
   ),
 
-  // ── Step 7: Ecosystem Objectives ─────────────────────────────────────────
+  // ── Col 6–7: Ecosystem objectives ─────────────────────────────────────────
   EarthCategory(
-    key: 'personalEcosystemVp',
-    label: 'Personal Ecosystem VP',
-    tooltip: 'Step 7: VP from your fulfilled personal Ecosystem objective card.',
+    key: 'personalEcoVp',
+    label: 'Personal Ecosystem',
+    tooltip: 'VP from your fulfilled personal Ecosystem objective card. Include the +7 VP bonus here if you were the first to complete your 4×4 tableau.',
     icon: Icons.person_pin,
     iconColor: Color(0xFF7B1FA2), // purple
   ),
   EarthCategory(
-    key: 'sharedEcosystemVp',
-    label: 'Shared Ecosystem VP',
-    tooltip: 'Step 7: VP from the two shared Ecosystem objectives you fulfilled.',
+    key: 'sharedEcoVp',
+    label: 'Shared Ecosystem',
+    tooltip: 'Combined VP from both shared Ecosystem objectives you fulfilled.',
     icon: Icons.groups,
-    iconColor: Color(0xFF0288D1), // light-blue
-  ),
-  EarthCategory(
-    key: 'firstTableauComplete',
-    label: 'First 4×4 Tableau Complete',
-    subtitle: '+7 VP bonus',
-    tooltip: 'Step 7: Check if this player was the first to fill all 16 tableau spaces (triggers end-game). Earns 7 VP.',
-    icon: Icons.workspace_premium,
-    iconColor: Color(0xFFFFB300), // amber
-    isCheckbox: true,
+    iconColor: Color(0xFF0288D1), // blue
   ),
 
-  // ── Step 8: Fauna Board ───────────────────────────────────────────────────
+  // ── Col 8: Compost ────────────────────────────────────────────────────────
+  EarthCategory(
+    key: 'compostCards',
+    label: 'Compost',
+    subtitle: '×1 VP per card',
+    tooltip: 'Count cards in your Compost pile. Each = 1 VP.',
+    icon: Icons.recycling,
+    iconColor: Color(0xFF4E342E), // dark-brown
+    multiplier: 1,
+  ),
+
+  // ── Col 9: Events ─────────────────────────────────────────────────────────
+  EarthCategory(
+    key: 'eventsVp',
+    label: 'Events VP',
+    tooltip: 'Base VP (♦) from cards in your Event space. Can be negative.',
+    icon: Icons.bolt,
+    iconColor: Color(0xFFEF5350), // red
+  ),
+
+  // ── Col 10: Fauna Board ───────────────────────────────────────────────────
   EarthCategory(
     key: 'faunaBoardVp',
     label: 'Fauna Board VP',
-    tooltip: 'Step 8: VP from Leaf tokens placed on the Fauna board.',
+    tooltip: 'VP from Leaf tokens placed on the Fauna board.',
     icon: Icons.cruelty_free,
     iconColor: Color(0xFF00897B), // teal
-  ),
-
-  // ── Freeform ─────────────────────────────────────────────────────────────
-  EarthCategory(
-    key: 'otherVp',
-    label: 'Other / Bonus VP',
-    tooltip: 'Any additional VP from house rules, promo cards, or expansions.',
-    icon: Icons.add_circle_outline,
-    iconColor: Color(0xFF546E7A), // blue-grey
   ),
 ];
 

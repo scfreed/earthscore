@@ -19,21 +19,17 @@ import 'earth_categories.dart';
 
 int _val(PlayerScore s, String key) {
   switch (key) {
-    case 'islandCardVp':        return s.islandCardVp;
-    case 'climateCardVp':       return s.climateCardVp;
-    case 'tableauCardsVp':      return s.tableauCardsVp;
-    case 'eventsVp':            return s.eventsVp;
-    case 'terrainVp':           return s.terrainVp;
-    case 'compostCards':        return s.compostCards;
-    case 'sproutsRemaining':    return s.sproutsRemaining;
-    case 'growthVp':            return s.growthVp;
-    case 'personalEcosystemVp': return s.personalEcosystemVp;
-    case 'sharedEcosystemVp':   return s.sharedEcosystemVp;
-    case 'faunaBoardVp':        return s.faunaBoardVp;
-    case 'firstTableauComplete':
-      return s.firstTableauComplete ? s.firstTableauBonusVp : 0;
-    case 'otherVp':             return s.otherVp;
-    default:                    return 0;
+    case 'cardsVp':       return s.cardsVp;
+    case 'sproutsVp':     return s.sproutsVp;
+    case 'trunksVp':      return s.trunksVp;
+    case 'canopyVp':      return s.canopyVp;
+    case 'terrainVp':     return s.terrainVp;
+    case 'personalEcoVp': return s.personalEcoVp;
+    case 'sharedEcoVp':   return s.sharedEcoVp;
+    case 'compostCards':  return s.compostCards;
+    case 'eventsVp':      return s.eventsVp;
+    case 'faunaBoardVp':  return s.faunaBoardVp;
+    default:              return 0;
   }
 }
 
@@ -159,28 +155,25 @@ const _kHeaderH    = 52.0;
 
 // Short labels for compact table
 const _shortLabels = {
-  'islandCardVp':        'Island Card',
-  'climateCardVp':       'Climate Card',
-  'tableauCardsVp':      'Tableau Cards',
-  'eventsVp':            'Events',
-  'terrainVp':           'Terrain',
-  'compostCards':        'Compost (×1)',
-  'sproutsRemaining':    'Sprouts (×1)',
-  'growthVp':            'Growth / Trees',
-  'personalEcosystemVp': 'Personal Eco',
-  'sharedEcosystemVp':   'Shared Eco',
-  'faunaBoardVp':        'Fauna Board',
-  'firstTableauComplete':'4×4 Bonus',
-  'otherVp':             'Other',
+  'cardsVp':       'Cards VP',
+  'sproutsVp':     'Sprouts (×1)',
+  'trunksVp':      'Trunks (×1)',
+  'canopyVp':      'Canopy VP',
+  'terrainVp':     'Terrain VP',
+  'personalEcoVp': 'Personal Eco',
+  'sharedEcoVp':   'Shared Eco',
+  'compostCards':  'Compost (×1)',
+  'eventsVp':      'Events VP',
+  'faunaBoardVp':  'Fauna Board',
 };
 
 const _groupLabels = {
-  0:  'Card VP',
-  4:  'Board Tokens',
-  8:  'Ecosystem',
-  10: 'Fauna Board',
-  11: 'Special Bonus',
-  12: 'Other',
+  0: 'Card VP',
+  1: 'Growth',
+  4: 'Terrain',
+  5: 'Ecosystem',
+  7: 'Compost & Events',
+  9: 'Fauna Board',
 };
 
 class ScoreCardWidget extends StatelessWidget {

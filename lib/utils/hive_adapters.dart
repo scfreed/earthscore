@@ -57,44 +57,34 @@ class PlayerScoreAdapter extends TypeAdapter<PlayerScore> {
     };
     return PlayerScore(
       playerId: f[0] as String,
-      islandCardVp: (f[1] as int?) ?? 0,
-      climateCardVp: (f[2] as int?) ?? 0,
-      tableauCardsVp: (f[3] as int?) ?? 0,
-      eventsVp: (f[4] as int?) ?? 0,
+      cardsVp: (f[1] as int?) ?? 0,
+      sproutsVp: (f[2] as int?) ?? 0,
+      trunksVp: (f[3] as int?) ?? 0,
+      canopyVp: (f[4] as int?) ?? 0,
       terrainVp: (f[5] as int?) ?? 0,
-      compostCards: (f[6] as int?) ?? 0,
-      sproutsRemaining: (f[7] as int?) ?? 0,
-      growthVp: (f[8] as int?) ?? 0,
-      personalEcosystemVp: (f[9] as int?) ?? 0,
-      sharedEcosystemVp: (f[10] as int?) ?? 0,
-      faunaBoardVp: (f[11] as int?) ?? 0,
-      firstTableauComplete: (f[12] as bool?) ?? false,
-      firstTableauBonusVp: (f[13] as int?) ?? 7,
-      otherVp: (f[14] as int?) ?? 0,
-      otherNote: (f[15] as String?) ?? '',
+      personalEcoVp: (f[6] as int?) ?? 0,
+      sharedEcoVp: (f[7] as int?) ?? 0,
+      compostCards: (f[8] as int?) ?? 0,
+      eventsVp: (f[9] as int?) ?? 0,
+      faunaBoardVp: (f[10] as int?) ?? 0,
     );
   }
 
   @override
   void write(BinaryWriter writer, PlayerScore obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(11)
       ..writeByte(0)..write(obj.playerId)
-      ..writeByte(1)..write(obj.islandCardVp)
-      ..writeByte(2)..write(obj.climateCardVp)
-      ..writeByte(3)..write(obj.tableauCardsVp)
-      ..writeByte(4)..write(obj.eventsVp)
+      ..writeByte(1)..write(obj.cardsVp)
+      ..writeByte(2)..write(obj.sproutsVp)
+      ..writeByte(3)..write(obj.trunksVp)
+      ..writeByte(4)..write(obj.canopyVp)
       ..writeByte(5)..write(obj.terrainVp)
-      ..writeByte(6)..write(obj.compostCards)
-      ..writeByte(7)..write(obj.sproutsRemaining)
-      ..writeByte(8)..write(obj.growthVp)
-      ..writeByte(9)..write(obj.personalEcosystemVp)
-      ..writeByte(10)..write(obj.sharedEcosystemVp)
-      ..writeByte(11)..write(obj.faunaBoardVp)
-      ..writeByte(12)..write(obj.firstTableauComplete)
-      ..writeByte(13)..write(obj.firstTableauBonusVp)
-      ..writeByte(14)..write(obj.otherVp)
-      ..writeByte(15)..write(obj.otherNote);
+      ..writeByte(6)..write(obj.personalEcoVp)
+      ..writeByte(7)..write(obj.sharedEcoVp)
+      ..writeByte(8)..write(obj.compostCards)
+      ..writeByte(9)..write(obj.eventsVp)
+      ..writeByte(10)..write(obj.faunaBoardVp);
   }
 }
 

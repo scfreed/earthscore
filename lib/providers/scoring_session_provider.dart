@@ -80,20 +80,6 @@ class ScoringSessionNotifier extends StateNotifier<ScoringSession?> {
     _updateScore(playerId, updated);
   }
 
-  /// Toggle the firstTableauComplete checkbox.
-  void toggleFirstTableau(String playerId, bool value) {
-    if (state == null) return;
-    final current = state!.scoreFor(playerId);
-    _updateScore(playerId, current.copyWith(firstTableauComplete: value));
-  }
-
-  /// Set the free-text other note.
-  void updateOtherNote(String playerId, String note) {
-    if (state == null) return;
-    final current = state!.scoreFor(playerId);
-    _updateScore(playerId, current.copyWith(otherNote: note));
-  }
-
   void updateGameMeta({String? name, DateTime? date, String? notes}) {
     if (state == null) return;
     state = state!.copyWith(
@@ -115,20 +101,17 @@ class ScoringSessionNotifier extends StateNotifier<ScoringSession?> {
 
   static PlayerScore _applyInt(PlayerScore s, String field, int v) {
     switch (field) {
-      case 'islandCardVp':      return s.copyWith(islandCardVp: v);
-      case 'climateCardVp':     return s.copyWith(climateCardVp: v);
-      case 'tableauCardsVp':    return s.copyWith(tableauCardsVp: v);
-      case 'eventsVp':          return s.copyWith(eventsVp: v);
-      case 'terrainVp':         return s.copyWith(terrainVp: v);
-      case 'compostCards':      return s.copyWith(compostCards: v);
-      case 'sproutsRemaining':  return s.copyWith(sproutsRemaining: v);
-      case 'growthVp':          return s.copyWith(growthVp: v);
-      case 'personalEcosystemVp': return s.copyWith(personalEcosystemVp: v);
-      case 'sharedEcosystemVp': return s.copyWith(sharedEcosystemVp: v);
-      case 'faunaBoardVp':      return s.copyWith(faunaBoardVp: v);
-      case 'firstTableauBonusVp': return s.copyWith(firstTableauBonusVp: v);
-      case 'otherVp':           return s.copyWith(otherVp: v);
-      default:                  return s;
+      case 'cardsVp':       return s.copyWith(cardsVp: v);
+      case 'sproutsVp':     return s.copyWith(sproutsVp: v);
+      case 'trunksVp':      return s.copyWith(trunksVp: v);
+      case 'canopyVp':      return s.copyWith(canopyVp: v);
+      case 'terrainVp':     return s.copyWith(terrainVp: v);
+      case 'personalEcoVp': return s.copyWith(personalEcoVp: v);
+      case 'sharedEcoVp':   return s.copyWith(sharedEcoVp: v);
+      case 'compostCards':  return s.copyWith(compostCards: v);
+      case 'eventsVp':      return s.copyWith(eventsVp: v);
+      case 'faunaBoardVp':  return s.copyWith(faunaBoardVp: v);
+      default:              return s;
     }
   }
 }

@@ -26,15 +26,6 @@ class CategoryRow extends ConsumerWidget {
     final score = ref.watch(playerLiveScoreProvider(playerId));
     final notifier = ref.read(scoringSessionProvider.notifier);
 
-    if (category.isCheckbox) {
-      return _CheckboxRow(
-        category: category,
-        checked: score?.firstTableauComplete ?? false,
-        bonusVp: score?.firstTableauBonusVp ?? 7,
-        onChanged: (v) => notifier.toggleFirstTableau(playerId, v),
-      );
-    }
-
     final value = _getInt(score, category.key);
     return _NumberRow(
       category: category,
@@ -46,19 +37,17 @@ class CategoryRow extends ConsumerWidget {
   static int _getInt(PlayerScore? s, String key) {
     if (s == null) return 0;
     switch (key) {
-      case 'islandCardVp':        return s.islandCardVp;
-      case 'climateCardVp':       return s.climateCardVp;
-      case 'tableauCardsVp':      return s.tableauCardsVp;
-      case 'eventsVp':            return s.eventsVp;
-      case 'terrainVp':           return s.terrainVp;
-      case 'compostCards':        return s.compostCards;
-      case 'sproutsRemaining':    return s.sproutsRemaining;
-      case 'growthVp':            return s.growthVp;
-      case 'personalEcosystemVp': return s.personalEcosystemVp;
-      case 'sharedEcosystemVp':   return s.sharedEcosystemVp;
-      case 'faunaBoardVp':        return s.faunaBoardVp;
-      case 'otherVp':             return s.otherVp;
-      default:                    return 0;
+      case 'cardsVp':       return s.cardsVp;
+      case 'sproutsVp':     return s.sproutsVp;
+      case 'trunksVp':      return s.trunksVp;
+      case 'canopyVp':      return s.canopyVp;
+      case 'terrainVp':     return s.terrainVp;
+      case 'personalEcoVp': return s.personalEcoVp;
+      case 'sharedEcoVp':   return s.sharedEcoVp;
+      case 'compostCards':  return s.compostCards;
+      case 'eventsVp':      return s.eventsVp;
+      case 'faunaBoardVp':  return s.faunaBoardVp;
+      default:              return 0;
     }
   }
 }

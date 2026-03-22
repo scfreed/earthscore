@@ -98,17 +98,14 @@ PlayerStats computeStats(Player player, List<Game> allGames) {
 /// Category-level breakdown for a single game score — useful for the
 /// detail screen bar charts.
 Map<String, int> categoryBreakdown(PlayerScore s) => {
-      'Island Card': s.islandCardVp,
-      'Climate Card': s.climateCardVp,
-      'Tableau Cards': s.tableauCardsVp,
-      'Events': s.eventsVp,
+      'Cards': s.cardsVp,
+      'Sprouts': s.sproutsVp,
+      'Trunks': s.trunksVp,
+      'Canopy': s.canopyVp,
       'Terrain': s.terrainVp,
+      'Personal Eco': s.personalEcoVp,
+      'Shared Eco': s.sharedEcoVp,
       'Compost': s.compostCards,
-      'Sprouts': s.sproutsRemaining,
-      'Growth': s.growthVp,
-      'Personal Eco': s.personalEcosystemVp,
-      'Shared Eco': s.sharedEcosystemVp,
+      'Events': s.eventsVp,
       'Fauna Board': s.faunaBoardVp,
-      '4×4 Bonus': s.firstTableauComplete ? s.firstTableauBonusVp : 0,
-      'Other': s.otherVp,
     };

@@ -11,11 +11,12 @@ import 'score_summary_screen.dart';
 // Category groups — maps first index in each group to its label
 // ─────────────────────────────────────────────────────────────────────────────
 const _kGroups = <int, String>{
-  0:  'Card VP',           // indices 0–3: Island, Climate, Tableau, Events
-  4:  'Tokens & Growth',  // indices 4–7: Compost, Sprouts, Trunks/Canopy, Terrain
-  8:  'Ecosystem Objectives', // indices 8–10: Personal Eco, Shared Eco, First Tableau
-  11: 'Fauna Board',      // index 11: Fauna Board VP
-  12: 'Other',            // index 12: Other VP
+  0: 'Card VP',              // index 0: Cards VP
+  1: 'Growth',               // indices 1–3: Sprouts, Trunks, Canopy
+  4: 'Terrain',              // index 4: Terrain VP
+  5: 'Ecosystem Objectives', // indices 5–6: Personal Eco, Shared Eco
+  7: 'Compost & Events',     // indices 7–8: Compost, Events VP
+  9: 'Fauna Board',          // index 9: Fauna Board VP
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -155,8 +156,6 @@ class _PlayerScoreForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final score = ref.watch(playerLiveScoreProvider(playerId));
-    final notifier = ref.read(scoringSessionProvider.notifier);
 
     return ListView(
       padding: const EdgeInsets.only(bottom: 40),
@@ -173,67 +172,9 @@ class _PlayerScoreForm extends ConsumerWidget {
             category: kEarthCategories[i],
             playerId: playerId,
           ),
-          // Extra note field for the "other" row
-          if (kEarthCategories[i].key == 'otherVp')
-            _OtherNoteField(
-              playerId: playerId,
-              initialValue: score?.otherNote ?? '',
-              onChanged: (v) => notifier.updateOtherNote(playerId, v),
-            ),
         ],
       ],
     );
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// "Other" free-text note field
-// ─────────────────────────────────────────────────────────────────────────────
-
-class _OtherNoteField extends StatefulWidget {
-  const _OtherNoteField({
-    required this.playerId,
-    required this.initialValue,
-    required this.onChanged,
-  });
-  final String playerId;
-  final String initialValue;
-  final ValueChanged<String> onChanged;
-
-  @override
-  State<_OtherNoteField> createState() => _OtherNoteFieldState();
-}
-
-class _OtherNoteFieldState extends State<_OtherNoteField> {
-  late TextEditingController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = TextEditingController(text: widget.initialValue);
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-      child: TextField(
-        controller: _ctrl,
-        decoration: const InputDecoration(
-          labelText: 'Note (optional)',
-          hintText: 'e.g. "Promo card +3 VP"',
-          prefixIcon: Icon(Icons.notes_outlined, size: 18),
-        ),
-        maxLength: 100,
-        maxLines: 2,
-        onChanged: widget.onChanged,
-      ),
-    );
-  }
-}

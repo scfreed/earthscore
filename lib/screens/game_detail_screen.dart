@@ -17,21 +17,17 @@ import '../widgets/player_avatar.dart';
 
 int _valueFor(PlayerScore s, String key) {
   switch (key) {
-    case 'islandCardVp':        return s.islandCardVp;
-    case 'climateCardVp':       return s.climateCardVp;
-    case 'tableauCardsVp':      return s.tableauCardsVp;
-    case 'eventsVp':            return s.eventsVp;
-    case 'terrainVp':           return s.terrainVp;
-    case 'compostCards':        return s.compostCards;
-    case 'sproutsRemaining':    return s.sproutsRemaining;
-    case 'growthVp':            return s.growthVp;
-    case 'personalEcosystemVp': return s.personalEcosystemVp;
-    case 'sharedEcosystemVp':   return s.sharedEcosystemVp;
-    case 'faunaBoardVp':        return s.faunaBoardVp;
-    case 'firstTableauComplete':
-      return s.firstTableauComplete ? s.firstTableauBonusVp : 0;
-    case 'otherVp':             return s.otherVp;
-    default:                    return 0;
+    case 'cardsVp':       return s.cardsVp;
+    case 'sproutsVp':     return s.sproutsVp;
+    case 'trunksVp':      return s.trunksVp;
+    case 'canopyVp':      return s.canopyVp;
+    case 'terrainVp':     return s.terrainVp;
+    case 'personalEcoVp': return s.personalEcoVp;
+    case 'sharedEcoVp':   return s.sharedEcoVp;
+    case 'compostCards':  return s.compostCards;
+    case 'eventsVp':      return s.eventsVp;
+    case 'faunaBoardVp':  return s.faunaBoardVp;
+    default:              return 0;
   }
 }
 
@@ -672,14 +668,7 @@ class _TableRow extends StatelessWidget {
     final isWinner = winners.contains(playerIds[i]);
     final isZero = v == 0;
 
-    String label;
-    if (category.isCheckbox) {
-      label = score?.firstTableauComplete == true
-          ? '+${score!.firstTableauBonusVp}'
-          : '—';
-    } else {
-      label = isZero ? '—' : '$v';
-    }
+    final label = isZero ? '—' : '$v';
 
     return Container(
       width: scoreW,
