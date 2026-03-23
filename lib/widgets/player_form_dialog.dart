@@ -76,7 +76,8 @@ class _PlayerFormSheetState extends ConsumerState<_PlayerFormSheet> {
     // Bottom inset for keyboard
     final bottomPadding = MediaQuery.viewInsetsOf(context).bottom;
 
-    return Padding(
+    return SingleChildScrollView(
+      child: Padding(
       padding: EdgeInsets.fromLTRB(24, 16, 24, 24 + bottomPadding),
       child: Form(
         key: _formKey,
@@ -162,6 +163,7 @@ class _PlayerFormSheetState extends ConsumerState<_PlayerFormSheet> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
