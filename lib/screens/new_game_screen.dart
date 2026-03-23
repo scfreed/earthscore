@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -65,23 +67,38 @@ class _NewGameScreenState extends ConsumerState<NewGameScreen> {
   void _startGame(List<Player> allPlayers) {
     if (!_canStart) return;
 
-    // Preserve the tap order within the selected set
-    final orderedIds = allPlayers
+    final selectedPlayers = allPlayers
         .where((p) => _selected.contains(p.id))
-        .map((p) => p.id)
         .toList();
+    final orderedIds = selectedPlayers.map((p) => p.id).toList();
 
-    ref.read(scoringSessionProvider.notifier).startSession(
-          gameId: _uuid.v4(),
-          gameName: _nameCtrl.text.trim(),
-          date: _date,
-          notes: _notesCtrl.text.trim(),
-          playerIds: orderedIds,
-        );
+    _showFirstPlayerSheet(context, selectedPlayers, orderedIds);
+  }
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const ScoringScreen()),
+  void _showFirstPlayerSheet(
+    BuildContext context,
+    List<Player> selectedPlayers,
+    List<String> orderedIds,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _FirstPlayerSheet(
+        players: selectedPlayers,
+        onBegin: (firstPlayer) {
+          ref.read(scoringSessionProvider.notifier).startSession(
+                gameId: _uuid.v4(),
+                gameName: _nameCtrl.text.trim(),
+                date: _date,
+                notes: _notesCtrl.text.trim(),
+                playerIds: orderedIds,
+              );
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const ScoringScreen()),
+          );
+        },
+      ),
     );
   }
 
@@ -367,6 +384,158 @@ class _SelectedStrip extends StatelessWidget {
           style: tt.bodySmall?.copyWith(color: cs.outline),
         ),
       ],
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _FirstPlayerSheet extends StatefulWidget {
+  const _FirstPlayerSheet({
+    required this.players,
+    required this.onBegin,
+  });
+
+  final List<Player> players;
+  final void Function(Player firstPlayer) onBegin;
+
+  @override
+  State<_FirstPlayerSheet> createState() => _FirstPlayerSheetState();
+}
+
+class _FirstPlayerSheetState extends State<_FirstPlayerSheet>
+    with SingleTickerProviderStateMixin {
+  late Player _firstPlayer;
+  late AnimationController _animController;
+  late Animation<double> _scaleAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 350),
+    );
+    _scaleAnim = CurvedAnimation(
+      parent: _animController,
+      curve: Curves.elasticOut,
+    );
+    _pick();
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
+
+  void _pick() {
+    _firstPlayer = widget.players[Random().nextInt(widget.players.length)];
+    _animController.forward(from: 0);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final tt = Theme.of(context).textTheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      padding: EdgeInsets.fromLTRB(
+        24,
+        20,
+        24,
+        MediaQuery.of(context).viewInsets.bottom + 28,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Drag handle
+          Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: cs.outlineVariant,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Title
+          Text(
+            'First Player',
+            style: tt.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'This player takes the first turn',
+            style: tt.bodyMedium?.copyWith(color: cs.outline),
+          ),
+          const SizedBox(height: 32),
+
+          // Player reveal
+          AnimatedBuilder(
+            animation: _scaleAnim,
+            builder: (context, child) => Transform.scale(
+              scale: _scaleAnim.value.clamp(0.0, 1.0),
+              child: child,
+            ),
+            child: Column(
+              key: ValueKey(_firstPlayer.id),
+              children: [
+                PlayerAvatar(player: _firstPlayer, size: 88),
+                const SizedBox(height: 16),
+                Text(
+                  _firstPlayer.name,
+                  style: tt.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: _firstPlayer.color,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 36),
+
+          // Buttons
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => setState(_pick),
+                  icon: const Icon(Icons.casino_outlined),
+                  label: const Text('Roll Again'),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                flex: 2,
+                child: FilledButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    widget.onBegin(_firstPlayer);
+                  },
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: const Text('Begin Game',
+                      style: TextStyle(fontSize: 16)),
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
