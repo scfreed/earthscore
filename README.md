@@ -43,7 +43,7 @@ A digital scoresheet app for the board game [*Earth*](https://boardgamegeek.com/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/earthscore.git
+git clone https://github.com/scfreed/earthscore.git
 cd earthscore
 flutter pub get
 flutter run
